@@ -1,16 +1,4 @@
-# end_of_sem
 
-A new Flutter project.
+<img width="366" alt="mockupscreen1" src="https://github.com/user-attachments/assets/afb07ccc-a2b1-427e-a20f-3e45c9983815" />
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img width="373" alt="Mockupscreen2" src="https://github.com/user-attachments/assets/fbc03341-291f-4379-a373-5839287845f1" />
