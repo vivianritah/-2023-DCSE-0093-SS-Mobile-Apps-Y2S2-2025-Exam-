@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 class MovieScreen extends StatefulWidget {
+  const MovieScreen({super.key});
+
   @override
   _MovieScreenState createState() => _MovieScreenState();
 }
 
 class _MovieScreenState extends State<MovieScreen> {
- 
   int _selectedIndex = 1;
 
-  
   final List<String> popularMovieTitles = [
-    'To All the Boys: P.S. I still Love You',
+    'To All the Boys: P.S. I Still Love You',
     'Baby Driver',
     'John Wick',
     'Exit',
@@ -25,202 +25,197 @@ class _MovieScreenState extends State<MovieScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue[900], 
-        foregroundColor: Colors.white, 
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            // TMDB Logo Placeholder
-            // Replace with Image.asset or Image.network when available
-            Text(
-              'TMDB',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(160),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.purple[400],
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(40),
+                bottomRight: Radius.circular(40),
               ),
             ),
-            // Search Button/Field Placeholder
-            Expanded(
+            child: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2), // Slightly transparent white
-                    borderRadius: BorderRadius.circular(20.0),
-                    border: Border.all(color: Colors.white), // White border
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(Icons.search, color: Colors.white, size: 20),
-                      SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          'Find your movies...',
-                          style: TextStyle(color: Colors.white70, fontSize: 16),
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    // Top Row
+                    Row(
+                      children: [
+                        Text(
+                          'TMDB',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+                            decoration: BoxDecoration(
+                              color: Colors.white24,
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Colors.white),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(Icons.search, color: Colors.white, size: 20),
+                                SizedBox(width: 8),
+                                Text(
+                                  'Find your movies...',
+                                  style: TextStyle(color: Colors.white70),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Icon(Icons.filter_list, color: Colors.white),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    // Title
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Discover & Enjoy\nYour Favourite Movies',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
-            // Sort/Filters Button Placeholder
-            Icon(Icons.filter_list, color: Colors.white),
-          ],
+          ),
         ),
-      ),
-      // Add title below AppBar using PreferredSize
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Discover & Enjoy Your Favorite Movies',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-          ),
-          // Categories Row
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                // Popular (Active)
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                  decoration: BoxDecoration(
-                    color: Colors.blue, // Blue background for active
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  child: Text(
-                    'Popular',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white, // White text for active
-                    ),
-                  ),
-                ),
-                // Upcoming (Inactive)
-                Text(
-                  'Upcoming',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey[700], // Grey text for inactive
-                  ),
-                ),
-                // Now Playing (Inactive)
-                Text(
-                  'Now Playing',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey[700], // Grey text for inactive
-                  ),
-                ),
-              ],
-            ),
-          ),
-          // Popular Movies Section (only popular list is shown below categories)
-          Expanded( // Use Expanded to allow ListView to take available space
-            child: ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: popularMovieTitles.length, // Use the count of specific titles
-              itemBuilder: (context, index) {
-                // Pass the specific title to MovieListItem
-                return MovieListItem(title: popularMovieTitles[index]);
-              },
-            ),
-          ),
-          // Removed Upcoming and Now Playing sections as per request
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.movie),
-            label: 'Movies',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark),
-            label: 'Bookmark',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Account',
-          ),
-        ],
-        currentIndex: _selectedIndex, // Set initial index
-        selectedItemColor: Colors.blue, // Blue for selected item
-        unselectedItemColor: Colors.grey, // Grey for unselected items
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed, // Ensure all items are visible
-      ),
-    );
-  }
-}
-
-class MovieListItem extends StatelessWidget {
-  // Add a title parameter
-  final String title;
-
-  // Constructor to receive the title
-  const MovieListItem({Key? key, required this.title}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0), // Add horizontal margin
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            // Movie Image Placeholder
+        body: Column(
+          children: [
+            // Tab Bar
             Container(
-              width: 100,
-              height: 150,
-              color: Colors.grey[300], // Placeholder color
-              child: Icon(Icons.movie, size: 50, color: Colors.grey[600]),
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: TabBar(
+                labelColor: Colors.white,
+                unselectedLabelColor: Colors.grey[600],
+                indicator: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.purple,
+                ),
+                tabs: [
+                  Tab(text: 'Popular'),
+                  Tab(text: 'Upcoming'),
+                  Tab(text: 'Now Playing'),
+                ],
+              ),
             ),
-            SizedBox(width: 10), // Spacing between image and text
-            // Movie Title and Description
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    title, // Use the passed title
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    'This is a placeholder for the movie description. It should provide a brief summary of the movie.', // Placeholder Description
-                    style: TextStyle(fontSize: 14, color: Colors.grey[700]),
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+              child: TabBarView(
+                children: [
+                  _buildMovieList(), // Popular
+                  Center(child: Text("Upcoming movies...")),
+                  Center(child: Text("Now playing movies...")),
                 ],
               ),
             ),
           ],
         ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.movie), label: 'Movies'),
+            BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: 'Bookmark'),
+            BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: 'Account'),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.purple,
+          unselectedItemColor: Colors.grey,
+          onTap: _onItemTapped,
+          type: BottomNavigationBarType.fixed,
+        ),
       ),
+    );
+  }
+
+  Widget _buildMovieList() {
+    return ListView.builder(
+      itemCount: popularMovieTitles.length,
+      itemBuilder: (context, index) {
+        return MovieListItem(title: popularMovieTitles[index]);
+      },
     );
   }
 }
 
+class MovieListItem extends StatelessWidget {
+  final String title;
 
+  const MovieListItem({super.key, required this.title});
 
-// red https://images.app.goo.gl/a1M11BbP6US7C7Xr7
-// birds of prey   https://images.app.goo.gl/LrDzXHiXzJNbL4EY9
-//  to all boys   https://images.app.goo.gl/ftFhCmJEf4D5pXmFA
-// ford v Ferrari  https://images.app.goo.gl/sEwkANVdJTqrw32B6
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Padding(
+        padding: EdgeInsets.all(8),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Image placeholder
+            Container(
+              width: 80,
+              height: 120,
+              color: Colors.grey[300],
+              child: Icon(Icons.image, size: 40, color: Colors.grey),
+            ),
+            SizedBox(width: 10),
+            // Movie info
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title,
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  SizedBox(height: 4),
+                  Text('2019 • 1h 48m',
+                      style: TextStyle(color: Colors.grey[700])),
+                  Text('Romance, Comedy',
+                      style: TextStyle(color: Colors.grey[700])),
+                  SizedBox(height: 8),
+                  Text(
+                    'This is a short description of the movie. It will be replaced with actual synopsis later.',
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 13),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 8),
+            // Rating
+            Container(
+              padding: EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.green[100],
+              ),
+              child: Text(
+                '7.2',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

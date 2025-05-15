@@ -1,244 +1,126 @@
 import 'package:flutter/material.dart';
 
 class Mockupscreentwo extends StatelessWidget {
-  const Mockupscreentwo({super.key});
-
-  // Data for "What's Popular" section
-  final List<Map<String, String>> popularMovies = const [
-    {
-      'title': 'Birds of Prey',
-      'description': 'Description for Birds of Prey',
-      'assetPath': 'assets/images/birds_of_prey.png',
-    }, // Add assetPath
-    {
-      'title': 'Red Sparrow',
-      'description': 'Description for Red Sparrow',
-      'assetPath': 'assets/images/red_sparrow.png',
-    }, // Add assetPath
+  final List<Movie> popularMovies = [
+    Movie("Birds of Prey", "7.2", "assets/images/birds of prey.jpg"),
+    Movie("Red Sparrow", "6.5", "assets/images/african-couple-cinema.jpg"),
   ];
 
-  // Data for "Now Playing" section
-  final List<Map<String, String>> nowPlayingMovies = const [
-    {
-      'title': 'To all the Boys',
-      'description': 'Description for To all the Boys',
-      'assetPath': 'assets/images/birds of prey.jpg',
-      'watchedPercentage': '6.9',
-    },
-    {
-      'title': 'Ford v Ferrari',
-      'description': 'Description for Ford v Ferrari',
-      'assetPath': 'assets/images/birds of prey.jpg', // Use assetPath
-      'watchedPercentage': '7.2',
-    },
+  final List<Movie> nowPlayingMovies = [
+    Movie("To All the Boys", "6.9", "assets/images/all boys.webp"),
+    Movie("Ford v Ferrari", "7.2", "assets/images/farari.jpg"),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Header Image with Gradient and Title
-            Container(
-              height: 300,
-              decoration: const BoxDecoration(
-                // Use AssetImage for the header image
-                image: DecorationImage(
-                  image: AssetImage(
-                    'assets/images/jumanji_header.png',
-                  ), // Replace with your header asset path
-                  fit: BoxFit.cover,
-                ),
+      backgroundColor: Colors.white,
+      body: ListView(
+        children: [
+          // Top Banner
+          Stack(
+            children: [
+              Image.asset(
+                "assets/images/african-couple-cinema.jpg",
+                height: 220,
+                width: double.infinity,
+                fit: BoxFit.cover,
               ),
-              child: Stack(
-                children: [
-                  // Gradient Overlay
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.transparent,
-                          Colors.black.withOpacity(0.7),
-                        ],
-                      ),
-                    ),
-                  ),
-                  // Movie Title
-                  const Positioned(
-                    bottom: 20,
-                    left: 20,
-                    child: Text(
-                      'Jumanji: The Next Level',
+              Positioned(
+                bottom: 16,
+                left: 16,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Jumanji: The Next Level",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 28,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-
-            Container(
-              color: Colors.white,
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "What's Popular",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 10),
-                  SizedBox(
-                    height: 250,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount:
-                          popularMovies
-                              .length, // Use the number of popular movies
-                      itemBuilder: (context, index) {
-                        final movie = popularMovies[index];
-                        return Container(
-                          width: 120, // Adjust width as needed
-                          margin: const EdgeInsets.only(right: 10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              // Use Image.asset for popular movie
-                              Expanded(
-                                child: Image.asset(
-                                  movie['assetPath']!, // Use the asset path from the data
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Text(
-                                movie['title']!,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 2),
-                              Text(
-                                movie['description']!,
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
+                    Text(
+                      "Action · Adventure · Comedy · Fantasy",
+                      style: TextStyle(color: Colors.white70),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+            ],
+          ),
 
-            // Now Playing section
-            Container(
-              color: Colors.white,
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Now Playing",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 10),
-                  SizedBox(
-                    height: 250, // Adjusted height to accommodate description
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount:
-                          nowPlayingMovies
-                              .length, // Use the number of now playing movies
-                      itemBuilder: (context, index) {
-                        final movie = nowPlayingMovies[index];
-                        return Container(
-                          width: 120,
-                          margin: const EdgeInsets.only(right: 10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Stack(
-                                  children: [
-                                    // Use Image.asset for now playing movie
-                                    Image.asset(
-                                      movie['assetPath']!, // Use the asset path from the data
-                                      fit: BoxFit.cover,
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                    ),
-                                    // Watched Percentage Circle
-                                    Positioned(
-                                      bottom: 5,
-                                      right: 5,
-                                      child: Container(
-                                        padding: const EdgeInsets.all(4),
-                                        decoration: BoxDecoration(
-                                          color: Colors.black.withOpacity(0.7),
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Text(
-                                          movie['watchedPercentage']!,
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Text(
-                                movie['title']!,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 2),
-                              Text(
-                                movie['description']!,
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+          SizedBox(height: 16),
+
+          // What's Popular
+          sectionTitle("What's Popular"),
+          movieList(popularMovies),
+
+          SizedBox(height: 16),
+
+          // Now Playing
+          sectionTitle("Now Playing"),
+          movieList(nowPlayingMovies),
+        ],
       ),
     );
   }
+
+  Widget sectionTitle(String title) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      child: Text(
+        title,
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+
+  Widget movieList(List<Movie> movies) {
+    return SizedBox(
+      height: 180,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        itemCount: movies.length,
+        itemBuilder: (context, index) {
+          final movie = movies[index];
+          return Padding(
+            padding: EdgeInsets.only(right: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    movie.image,
+                    height: 120,
+                    width: 100,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                SizedBox(height: 6),
+                Text(movie.title, maxLines: 1, overflow: TextOverflow.ellipsis),
+                Row(
+                  children: [
+                    Icon(Icons.star, size: 14, color: Colors.orange),
+                    SizedBox(width: 4),
+                    Text(movie.rating),
+                  ],
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class Movie {
+  final String title;
+  final String rating;
+  final String image;
+
+  Movie(this.title, this.rating, this.image);
 }

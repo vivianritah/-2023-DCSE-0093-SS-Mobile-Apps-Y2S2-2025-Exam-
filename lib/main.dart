@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           seedColor: const Color.fromARGB(255, 200, 175, 243),
         ),
       ),
-      home: Mockupscreentwo(),
+      home: MovieScreen(),
     );
   }
 }
